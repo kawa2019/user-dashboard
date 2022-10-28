@@ -1,61 +1,47 @@
 import { FC, useEffect } from 'react';
-import {
-  Box,
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from '@mui/material';
-import { useAppDispatch } from '../../store';
-import { UsersActions } from '../../store/features/users';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { UsersDashboardActions } from '../../store/features/usersDashboard';
+import { UsersDashboardSelectors } from '../../store/features/usersDashboard/usersDashboard.selectors';
+import { FetchingStatus } from '../../services/api/interfaces';
+import UsersTable from '../../components/UsersTable';
+import { UsersStyled } from './Users.styles';
+import { Container } from '../../shared/Container/Container.styles';
+import { Header } from '../../shared/Header/Header.styles';
+import { Link } from 'react-router-dom';
 
 const Users: FC = () => {
+  const users = useAppSelector(UsersDashboardSelectors.getGetUsers);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(UsersActions.getUsers());
+    dispatch(UsersDashboardActions.getUsers());
   }, []);
 
   return (
-    <Box>
-      <Typography component={'h1'} variant={'body1'}>
-        Dashboard
-      </Typography>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Id</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>City</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow hover>
-              <TableCell>1</TableCell>
-              <TableCell>John Smith</TableCell>
-              <TableCell>jsonsmith</TableCell>
-              <TableCell>john@gmail.com</TableCell>
-              <TableCell>NYC</TableCell>
-              <TableCell>
-                <Button>edit</Button>
-              </TableCell>
-              <TableCell>
-                <Button>delete</Button>
-              </TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+    <Container>
+      <UsersStyled>
+        <Header variant={'h1'}>Dashboard</Header>
+        <Box className={'Users-MainContent'}>
+          <Box className={'Users-TopBar'}>
+            <Typography variant={'body2'} className={'Users-SubHeader'}>
+              User list
+            </Typography>
+            <Button
+              to={'/user'}
+              component={Link}
+              variant={'contained'}
+              className={'Users-AddUserBtn'}>
+              Add new
+            </Button>
+          </Box>
+          <Box className={'Users-TableWrapper'}>
+            {users.fetchingStatus === FetchingStatus.PENDING && <CircularProgress />}
+            {users.data && <UsersTable />}
+          </Box>
+        </Box>
+      </UsersStyled>
+    </Container>
   );
 };
 

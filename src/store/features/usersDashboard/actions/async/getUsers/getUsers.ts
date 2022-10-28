@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { UsersState } from '../../../interfaces';
+import { UsersDashboardState, UserType } from '../../../interfaces';
 
-export const getUsers = createAsyncThunk<UsersState>('users/getUsers', async () => {
+export const getUsers = createAsyncThunk<UserType[]>('usersDashboard/getUsers', async () => {
   const endpoint = 'https://my-json-server.typicode.com/karolkproexe/jsonplaceholderdb/data';
   const instance = axios.create();
 

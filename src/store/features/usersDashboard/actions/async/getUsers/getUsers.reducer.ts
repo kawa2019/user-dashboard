@@ -1,9 +1,9 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { UsersState } from '../../../interfaces';
+import { UsersDashboardState } from '../../../interfaces';
 import { getUsers } from './getUsers';
 import { FetchingStatus } from '../../../../../../services/api/interfaces';
 
-export const getUsersExtraReducer = (builder: ActionReducerMapBuilder<UsersState>) => {
+export const getUsersExtraReducer = (builder: ActionReducerMapBuilder<UsersDashboardState>) => {
   builder.addCase(getUsers.pending, (state, action) => {
     state.api.getUsers.fetchingStatus = FetchingStatus.PENDING;
     state.api.getUsers.error = null;
