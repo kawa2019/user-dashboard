@@ -1,13 +1,5 @@
 import { FC, useMemo } from 'react';
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel,
-} from '@mui/material';
+import { Button, Table, TableBody, TableCell, TableRow } from '@mui/material';
 import { useAppSelector } from '../../store';
 import { UsersDashboardSelectors } from '../../store/features/usersDashboard/usersDashboard.selectors';
 import { UserType } from '../../store/features/usersDashboard/interfaces';

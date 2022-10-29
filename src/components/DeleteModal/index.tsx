@@ -1,5 +1,5 @@
 import { FC, useCallback, useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { Button, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useAppDispatch } from '../../store';
 import { UserType } from '../../store/features/usersDashboard/interfaces';
 import { UsersDashboardActions } from '../../store/features/usersDashboard';

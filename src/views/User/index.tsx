@@ -6,8 +6,6 @@ import UserForm from '../../components/UserForm';
 import { UserStyled } from './User.styles';
 
 const User: FC = () => {
-  //
-
   return (
     <Container>
       <UserStyled>
