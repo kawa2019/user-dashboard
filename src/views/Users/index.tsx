@@ -15,13 +15,17 @@ const Users: FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(UsersDashboardActions.getUsers());
+    if (!users.data) {
+      dispatch(UsersDashboardActions.getUsers());
+    }
   }, []);
 
   return (
     <Container>
       <UsersStyled>
-        <Header variant={'h1'}>Dashboard</Header>
+        <Header variant={'h1'} className={'Users-Header'}>
+          Dashboard
+        </Header>
         <Box className={'Users-MainContent'}>
           <Box className={'Users-TopBar'}>
             <Typography variant={'body2'} className={'Users-SubHeader'}>

@@ -1,31 +1,39 @@
-import { FC } from 'react';
-import { Button, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
+import { FC, useMemo } from 'react';
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+} from '@mui/material';
 import { useAppSelector } from '../../store';
 import { UsersDashboardSelectors } from '../../store/features/usersDashboard/usersDashboard.selectors';
 import { UserType } from '../../store/features/usersDashboard/interfaces';
 import { UserTableStyled } from './UserTable.styles';
 import { Link } from 'react-router-dom';
+import DeleteModal from '../DeleteModal';
+import UsersTableHead from './UsersTableHead';
+import { getSortedUsers } from '../../services/Table';
 
 const UsersTable: FC = () => {
   const users = useAppSelector(UsersDashboardSelectors.getGetUsers);
+  const sortOrder = useAppSelector(UsersDashboardSelectors.getSortOrder);
+
+  const sortedUsers = useMemo(() => {
+    if (users.data) {
+      return getSortedUsers(users.data, sortOrder);
+    } else return [];
+  }, [users, sortOrder]);
 
   return (
     <UserTableStyled>
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Id</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Username</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>City</TableCell>
-            <TableCell>Edit</TableCell>
-            <TableCell>Delete</TableCell>
-          </TableRow>
-        </TableHead>
+        <UsersTableHead />
         <TableBody>
           {users.data &&
-            users.data.map((user: UserType) => (
+            sortedUsers.map((user: UserType) => (
               <TableRow hover>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
@@ -33,12 +41,16 @@ const UsersTable: FC = () => {
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user?.address.city}</TableCell>
                 <TableCell>
-                  <Button variant={'contained'} to={`/user/${user.id}`} component={Link}>
+                  <Button
+                    variant={'contained'}
+                    to={`/user/${user.id}`}
+                    component={Link}
+                    className={'UsersTable-Btn UsersTable-EditBtn'}>
                     edit
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Button variant={'contained'}>delete</Button>
+                  {users.data && <DeleteModal users={users.data} userToDelete={user} />}
                 </TableCell>
               </TableRow>
             ))}

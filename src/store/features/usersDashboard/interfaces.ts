@@ -9,6 +9,7 @@ export interface UsersDashboardState {
       error: SerializedError | null;
     };
   };
+  sortOrder: OrderType;
 }
 
 interface UserAddress {
@@ -16,7 +17,7 @@ interface UserAddress {
   suite: string;
   city: string;
   zipcode: string;
-  geo: {
+  geo?: {
     lat: number;
     lng: number;
   };
@@ -27,6 +28,7 @@ interface UserCompany {
   catchPhrase: string;
   bs: string;
 }
+
 export interface UserType {
   id: number;
   name: string;
@@ -37,3 +39,5 @@ export interface UserType {
   website: string;
   company: UserCompany;
 }
+
+export type OrderType = 'asc' | 'desc';

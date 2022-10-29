@@ -1,6 +1,6 @@
 import { styled, TableContainer } from '@mui/material';
 
-export const UserTableStyled = styled(TableContainer)(() => ({
+export const UserTableStyled = styled(TableContainer)(({ theme }) => ({
   border: '2px solid #E6E5E6',
   borderBottom: 'none',
 
@@ -10,5 +10,11 @@ export const UserTableStyled = styled(TableContainer)(() => ({
   },
   '.MuiTableCell-root': {
     borderBottomWidth: '2px',
+  },
+  '.UsersTable-Btn': {
+    padding: '5px 30px',
+  },
+  '.UsersTable-EditBtn': {
+    backgroundColor: theme.palette.warning.light,
   },
 }));

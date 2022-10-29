@@ -9,4 +9,5 @@ export const initialState: UsersDashboardState = {
       error: null,
     },
   },
+  sortOrder: 'asc',
 };

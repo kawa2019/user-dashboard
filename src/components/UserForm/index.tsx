@@ -1,14 +1,34 @@
 import { ChangeEvent, FC, SyntheticEvent, useCallback, useEffect, useState } from 'react';
 import { Button, FormLabel, Stack, TextField } from '@mui/material';
 import { UserFormStyled } from './UserForm.styles';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { UsersDashboardSelectors } from '../../store/features/usersDashboard/usersDashboard.selectors';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
 import { UsersDashboardActions } from '../../store/features/usersDashboard';
 
+const defaultUser = {
+  name: '',
+  username: '',
+  email: '',
+  address: {
+    street: '',
+    suite: '',
+    city: '',
+    zipcode: '',
+  },
+  phone: '',
+  website: '',
+  company: {
+    name: '',
+    catchPhrase: '',
+    bs: '',
+  },
+};
+
 export const UserForm: FC = () => {
+  const navigate = useNavigate();
   const params = useParams<{ id?: string }>();
   const users = useSelector(UsersDashboardSelectors.getGetUsers);
   const dispatch = useAppDispatch();
@@ -89,12 +109,15 @@ export const UserForm: FC = () => {
           } else {
             const customId = new Date().getTime();
             const newUser = {
+              ...defaultUser,
               ...values,
               id: customId,
             };
             const newUsers = [...users.data, newUser];
             dispatch(UsersDashboardActions.updateUsers(newUsers));
           }
+
+          navigate('/');
         }
       }
     },
