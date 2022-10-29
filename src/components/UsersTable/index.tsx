@@ -26,7 +26,7 @@ const UsersTable: FC = () => {
         <TableBody>
           {users.data &&
             sortedUsers.map((user: UserType) => (
-              <TableRow hover>
+              <TableRow hover key={user.id}>
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user?.username}</TableCell>
