@@ -4,24 +4,30 @@ import { Header } from '../../shared/Header/Header.styles';
 import { Box, Typography } from '@mui/material';
 import UserForm from '../../components/UserForm';
 import { UserStyled } from './User.styles';
+import { MainContent } from '../../shared/MainContent/MainContent.styles';
+import { TopBar } from '../../shared/TopBar/TopBar.styles';
 
 const User: FC = () => {
+  //notes
+  //mozna jeszcze zrobic tak
+  //zamiast shared co jest dobre
+  //zrobic w comnent
   return (
     <Container>
       <UserStyled>
         <Header variant={'h1'} className={'Users-Header'}>
           Dashboard
         </Header>
-        <Box className={'User-MainContent'}>
-          <Box className={'User-TopBar'}>
+        <MainContent>
+          <TopBar>
             <Typography variant={'body2'} className={'User-SubHeader'}>
               Form
             </Typography>
-          </Box>
+          </TopBar>
           <Box className={'User-FormWrapper'}>
             <UserForm />
           </Box>
-        </Box>
+        </MainContent>
       </UserStyled>
     </Container>
   );

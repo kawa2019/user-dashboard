@@ -9,6 +9,8 @@ import { UsersStyled } from './Users.styles';
 import { Container } from '../../shared/Container/Container.styles';
 import { Header } from '../../shared/Header/Header.styles';
 import { Link } from 'react-router-dom';
+import { MainContent } from '../../shared/MainContent/MainContent.styles';
+import { TopBar } from '../../shared/TopBar/TopBar.styles';
 
 const Users: FC = () => {
   const users = useAppSelector(UsersDashboardSelectors.getGetUsers);
@@ -26,8 +28,8 @@ const Users: FC = () => {
         <Header variant={'h1'} className={'Users-Header'}>
           Dashboard
         </Header>
-        <Box className={'Users-MainContent'}>
-          <Box className={'Users-TopBar'}>
+        <MainContent>
+          <TopBar>
             <Typography variant={'body2'} className={'Users-SubHeader'}>
               User list
             </Typography>
@@ -38,12 +40,12 @@ const Users: FC = () => {
               className={'Users-AddUserBtn'}>
               Add new
             </Button>
-          </Box>
+          </TopBar>
           <Box className={'Users-TableWrapper'}>
             {users.fetchingStatus === FetchingStatus.PENDING && <CircularProgress />}
             {users.data && <UsersTable />}
           </Box>
-        </Box>
+        </MainContent>
       </UsersStyled>
     </Container>
   );
