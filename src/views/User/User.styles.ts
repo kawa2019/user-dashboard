@@ -1,9 +1,14 @@
 import { Box, styled } from '@mui/material';
 
 export const UserStyled = styled(Box)(({ theme }) => ({
+  '.Users-Header': {
+    marginTop: '40px',
+  },
   '.User-MainContent': {
     borderRadius: '10px',
     boxShadow: theme.shadows[15],
+    marginTop: '40px',
+    marginBottom: '30px',
   },
   '.User-TopBar': {
     padding: '30px 20px 40px 20px',

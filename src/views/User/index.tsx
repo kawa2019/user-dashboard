@@ -9,7 +9,9 @@ const User: FC = () => {
   return (
     <Container>
       <UserStyled>
-        <Header variant={'h1'}>Dashboard</Header>
+        <Header variant={'h1'} className={'Users-Header'}>
+          Dashboard
+        </Header>
         <Box className={'User-MainContent'}>
           <Box className={'User-TopBar'}>
             <Typography variant={'body2'} className={'User-SubHeader'}>
